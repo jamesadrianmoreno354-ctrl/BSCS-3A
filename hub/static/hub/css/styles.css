@@ -1,0 +1,20 @@
+/* Minimal custom styles to complement Tailwind */
+html, body {
+  height: 100%;
+}
+
+.filter-btn[aria-pressed="true"] {
+  outline: 2px solid rgba(99,102,241,0.25);
+}
+
+.card-link {
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card-link:hover {
+  transform: translateY(-4px);
+}
+
+button:focus, a:focus, input:focus {
+  outline: 3px solid rgba(99,102,241,0.2);
+  outline-offset: 2px;
+}

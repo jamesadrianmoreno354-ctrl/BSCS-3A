@@ -1,0 +1,94 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio Hub — Directory</title>
+  <meta name="description" content="A curated directory of portfolios">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'hub/css/styles.css' %}">
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <header class="max-w-6xl mx-auto px-6 py-8">
+    <nav class="flex items-center justify-between">
+      <a href="/" class="text-2xl font-semibold">Portfolio Hub</a>
+      <div class="hidden sm:flex gap-4 items-center">
+        <a href="#directory" class="text-sm text-gray-600 hover:text-gray-900">Directory</a>
+        <a href="#contact" class="text-sm text-gray-600 hover:text-gray-900">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6">
+    <section class="bg-white rounded-lg shadow p-8 md:p-12 -mt-4">
+      <div class="md:flex md:items-center md:justify-between">
+        <div class="md:flex-1">
+          <h1 class="text-3xl sm:text-4xl font-extrabold">Portfolio Hub</h1>
+          <p class="mt-3 text-gray-600 max-w-2xl">A curated, searchable directory linking to designers, developers, researchers, and academics.</p>
+        </div>
+        <div class="mt-6 md:mt-0 md:ml-8">
+          <div class="bg-gray-50 p-4 rounded-md">
+            <form method="get">
+              <label for="q" class="text-sm text-gray-600">Quick search</label>
+              <input id="q" name="q" value="{{ query }}" aria-label="Search portfolios" type="search" placeholder="Search..." class="mt-2 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="directory" class="mt-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h2 class="text-xl font-semibold">Portfolio Directory</h2>
+        <div class="flex gap-2 flex-wrap" id="filters">
+          {% for cat in categories %}
+            <a href="?{% if query %}q={{ query|urlencode }}&{% endif %}category={{ cat }}" class="px-3 py-1 text-sm {% if active_category == cat %}bg-indigo-600 text-white{% else %}bg-white text-gray-700 border{% endif %} rounded-md">{{ cat }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for p in portfolios %}
+          <article class="bg-white rounded-lg shadow p-5 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-semibold">{{ p.name }}</h3>
+              <p class="mt-2 text-sm text-gray-600">{{ p.description }}</p>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="text-xs text-gray-500">
+                {% for t in p.tech %}
+                  <span class="inline-block mr-2 bg-gray-100 px-2 py-1 rounded text-gray-700">{{ t }}</span>
+                {% endfor %}
+              </div>
+              <div>
+                <a class="card-link inline-block px-3 py-1 text-sm bg-indigo-600 text-white rounded-md" href="{% url 'hub:detail' p.id %}">View</a>
+                <a class="ml-2 text-xs text-gray-500" href="{{ p.url }}" target="_blank" rel="noopener noreferrer">External</a>
+              </div>
+            </div>
+          </article>
+        {% empty %}
+          <div class="col-span-3 text-center text-gray-500">No portfolios found.</div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="contact" class="mt-12 mb-16">
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-lg font-semibold">Contact</h3>
+        <p class="mt-2 text-gray-600">Placeholder contact info. Replace with a proper form for production.</p>
+        <a href="mailto:hello@example.com" class="mt-4 inline-block text-indigo-600 hover:underline">hello@example.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-6 py-8 text-sm text-gray-500">
+      <div class="flex items-center justify-between">
+      <div>© {% now "Y" %} Portfolio Hub</div>
+      <div>Built with Django • Tailwind</div>
+    </div>
+  </footer>
+
+  <script src="{% static 'hub/js/app.js' %}" defer></script>
+</body>
+</html>
