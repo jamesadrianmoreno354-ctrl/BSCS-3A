@@ -20,28 +20,33 @@
 
   <main class="max-w-4xl mx-auto px-6">
     <article class="bg-white rounded-lg shadow p-8 md:p-12">
-      <header>
-        <h1 class="text-3xl font-bold">{{ p.name }}</h1>
-        <p class="mt-2 text-gray-600">{{ p.category }}</p>
-      </header>
+      <div class="md:flex md:items-start md:gap-8">
+        <div class="flex-none w-24 h-24 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center text-2xl font-bold">{{ p.name|slice:":1" }}</div>
+        <div class="flex-1">
+          <header>
+            <h1 class="text-3xl font-bold text-gray-900">{{ p.name }}</h1>
+            <p class="mt-2 text-indigo-700 font-medium">{{ p.category }}</p>
+          </header>
 
-      <section class="mt-6">
-        <p class="text-gray-700">{{ p.description }}</p>
-      </section>
+          <section class="mt-6">
+            <p class="text-gray-700 leading-relaxed">{{ p.description }}</p>
+          </section>
 
-      <section class="mt-6">
-        <h4 class="text-sm font-semibold text-gray-500">Tech / Tags</h4>
-        <div class="mt-2">
-          {% for t in p.tech %}
-            <span class="inline-block mr-2 mt-2 bg-gray-100 px-3 py-1 rounded text-sm text-gray-700">{{ t }}</span>
-          {% endfor %}
+          <section class="mt-6">
+            <h4 class="text-sm font-semibold text-gray-500">Tech / Tags</h4>
+            <div class="mt-2 flex gap-2 flex-wrap">
+              {% for t in p.tech %}
+                <span class="tag">{{ t }}</span>
+              {% endfor %}
+            </div>
+          </section>
+
+          <section class="mt-6 flex gap-3">
+            <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Visit external portfolio</a>
+            <a href="mailto:hello@example.com?subject=Interested%20in%20listing%20my%20portfolio%20on%20Portfolio%20Hub" class="px-4 py-2 border rounded-md text-gray-700">Design my portfolio / List mine</a>
+          </section>
         </div>
-      </section>
-
-      <section class="mt-6 flex gap-3">
-        <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Visit external portfolio</a>
-        <a href="mailto:hello@example.com?subject=Interested%20in%20listing%20my%20portfolio%20on%20Portfolio%20Hub" class="px-4 py-2 border rounded-md text-gray-700">Design my portfolio / List mine</a>
-      </section>
+      </div>
     </article>
   </main>
 

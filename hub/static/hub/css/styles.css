@@ -1,20 +1,49 @@
-/* Minimal custom styles to complement Tailwind */
+/* Modern design tokens */
+:root{
+  --primary: #4f46e5; /* indigo-600 */
+  --muted: #6b7280; /* gray-500 */
+  --bg: #f8fafc; /* gray-50 */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
 html, body {
   height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
 }
 
-.filter-btn[aria-pressed="true"] {
-  outline: 2px solid rgba(99,102,241,0.25);
-}
-
+/* Card styles */
 .card-link {
-  transition: transform .15s ease, box-shadow .15s ease;
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease;
 }
 .card-link:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(15,23,42,0.08);
 }
 
+.portfolio-card {
+  border: 1px solid rgba(15,23,42,0.04);
+}
+
+.tag {
+  background: rgba(15,23,42,0.04);
+  color: #111827;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 999px;
+}
+
+/* Hero subtle gradient */
+.hero-gradient{
+  background: linear-gradient(180deg, rgba(79,70,229,0.06), rgba(255,255,255,0));
+}
+
+/* Search box */
+.search-box{box-shadow:0 6px 16px rgba(15,23,42,0.04)}
+
+/* Accessibility focus */
 button:focus, a:focus, input:focus {
-  outline: 3px solid rgba(99,102,241,0.2);
+  outline: 3px solid rgba(79,70,229,0.14);
   outline-offset: 2px;
 }
